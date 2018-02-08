@@ -1,0 +1,30 @@
+parameters:
+    tax_calculator_class: AppBundle\TaxCalculator\TaxCalculator
+    tax_reader_class: AppBundle\TaxCalculator\Reader\AllAccountsReader
+    tax_currency_converter_class: AppBundle\TaxCalculator\CurrencyConverter
+    tax_free_sell_definer_class: AppBundle\TaxCalculator\FreeSellDefiner
+    tax_required_sell_definer_class: AppBundle\TaxCalculator\RequiredSellDefiner
+
+services:
+    tax_calculator:
+        class: '%tax_calculator_class%'
+        arguments: ['@tax_reader', '@tax_currency_converter']
+
+    tax_free_sell_definer:
+        class: '%tax_free_sell_definer_class%'
+        arguments: []
+
+    tax_required_sell_definer:
+        class: '%tax_required_sell_definer_class%'
+        arguments: []
+
+    tax_reader:
+        class: '%tax_reader_class%'
+        arguments:
+          - '@tax_free_sell_definer'
+          - '@tax_required_sell_definer'
+          - '@tax_currency_converter'
+
+    tax_currency_converter:
+        class: '%tax_currency_converter_class%'
+        arguments: []
