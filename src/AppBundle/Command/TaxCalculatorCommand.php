@@ -36,7 +36,7 @@ class TaxCalculatorCommand extends ContainerAwareCommand
         $from = new \DateTime($input->getArgument('from'));
         $to = new \DateTime($input->getArgument('to'));
 
-        $result = $this->getContainer()->get('tax_calculator')->calculate($input->getArgument('source'), $from, $to);
+        $result = $this->getContainer()->get('tax_calculator')->calculate($input->getArgument('source'));
 
         $output->writeln(
             'Доход за отчетный период: ' . number_format($result, 2, '.', ' ')

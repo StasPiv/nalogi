@@ -1,0 +1,6 @@
+api_calculate_from_file:
+  resource: '@ApiBundle/Controller/CalculateFromFileController.php'
+  type: rest
+  prefix: /
+  defaults:
+    _format: json

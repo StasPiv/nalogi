@@ -1,0 +1,8 @@
+parameters:
+  core.handler.calculate_from_file.class: CoreBundle\Handler\CalculateFromFileHandler
+services:
+  core.handler.calculate_from_file:
+    class: '%core.handler.calculate_from_file.class%'
+    arguments:
+      - '@service_container'
+      - '@event_dispatcher'

@@ -36,11 +36,10 @@ class TaxCalculator
 
     /**
      * @param mixed $source
-     * @param \DateTime $from
-     * @param \DateTime $to
+     * @param string|null $output
      * @return float
      */
-    public function calculate($source, \DateTime $from, \DateTime $to): float
+    public function calculate($source, string &$output = null): float
     {
         $taxRows = $this->reader->parseSource($source);
 
@@ -106,15 +105,22 @@ class TaxCalculator
                 );
             }
 
-            echo implode(
-                '|',
-                [
-                    $taxRow->getDate()->format('Y-m-d'),
-                    $taxRow->getCurrency(),
+            $outputRow = implode(
+                    '|',
+                    [
+                        $taxRow->getDate()->format('Y-m-d'),
+                        $taxRow->getCurrency(),
 //                    $taxRow->getSellDestination(),
-                    $formula
-                ]
-            ) . PHP_EOL;
+                        $formula
+                    ]
+                ).PHP_EOL;
+
+
+            if (!isset($output)) {
+                echo $outputRow;
+            } else {
+                $output[] = explode('|', $outputRow);
+            }
 
             $value += $rowValue;
         }
