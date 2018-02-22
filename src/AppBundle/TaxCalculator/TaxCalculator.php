@@ -39,7 +39,7 @@ class TaxCalculator
      * @param string|null $output
      * @return float
      */
-    public function calculate($source, string &$output = null): float
+    public function calculate($source, &$output = null): float
     {
         $taxRows = $this->reader->parseSource($source);
 
