@@ -42,7 +42,7 @@ class CalculateFromFileHandler implements ContainerAwareInterface, CalculateFrom
         $fileName = $request->getFile()->getPath()
             .DIRECTORY_SEPARATOR.$request->getFile()->getBasename();
 
-        $output = '';
+        $output = [];
         $result = $this->container->get('tax_calculator')->calculate($fileName, $output);
 
         return [
